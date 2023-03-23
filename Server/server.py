@@ -24,3 +24,24 @@ while(True):
         print(" Shutting down server.")
         c.close()
         break
+
+
+def calculateLine(line):
+    stringList = line.split("")
+    solution= int(stringList[0])
+    for x in range(1 , len(stringList) , 2):
+        if(x % 2 == 1):
+            if(stringList[x]== "+"):
+                solution += int(stringList[x+1])
+            elif (stringList[x] == "-"):
+                solution -= int(stringList[x + 1])
+            elif (stringList[x] == "/"):
+                solution /= int(stringList[x + 1])
+            elif (stringList[x] == "*"):
+                solution *= int(stringList[x + 1])
+            elif (stringList[x] == "%"):
+                solution = solution % int(stringList[x + 1])
+            elif (stringList[x] == "^"):
+                solution = solution ^ int(stringList[x + 1])
+    return solution
+
