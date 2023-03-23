@@ -16,8 +16,11 @@ while(True):
     print('Got connection from', addr)
 
     message = "Thank you for connecting."
-    c.send(message.encode("utf-8"))
+    c.send(message.encode())
+    print(c.recv(1024).decode())
 
-    print(" Shutting down server.")
-    c.close()
-    break
+    if(c.recv(1024).decode() == "exit"):
+
+        print(" Shutting down server.")
+        c.close()
+        break
