@@ -7,13 +7,33 @@ def create_log_message(action, message):
     current_date = datetime.today().strftime('%Y-%m-%d')
     current_time = datetime.now().strftime("%H:%M")
     return "{} [{}] {} {}\n".format(current_date, action, current_time, message)
-logFile = open("log.txt", 'a')
+
+def calculateLine(line):
+    stringList = line.split("")
+    solution= int(stringList[0])
+    for x in range(1 , len(stringList) , 2):
+        if(x % 2 == 1):
+            if(stringList[x]== "+"):
+                solution += int(stringList[x+1])
+            elif (stringList[x] == "-"):
+                solution -= int(stringList[x + 1])
+            elif (stringList[x] == "/"):
+                solution /= int(stringList[x + 1])
+            elif (stringList[x] == "*"):
+                solution *= int(stringList[x + 1])
+            elif (stringList[x] == "%"):
+                solution = solution % int(stringList[x + 1])
+            elif (stringList[x] == "^"):
+                solution = solution ^ int(stringList[x + 1])
+    return solution
 
 s = socket.socket()
 port = 6000
 s.bind(('', port))
 s.listen(5)
 print("[Server] Server Socket is listening on PORT:", port)
+
+logFile = open("log.txt", 'a')
 
 while (True):
     c, addr = s.accept()
@@ -44,26 +64,6 @@ while (True):
     print("[server] Shutting down server.")
     c.close()
     break
-
-
-def calculateLine(line):
-    stringList = line.split("")
-    solution= int(stringList[0])
-    for x in range(1 , len(stringList) , 2):
-        if(x % 2 == 1):
-            if(stringList[x]== "+"):
-                solution += int(stringList[x+1])
-            elif (stringList[x] == "-"):
-                solution -= int(stringList[x + 1])
-            elif (stringList[x] == "/"):
-                solution /= int(stringList[x + 1])
-            elif (stringList[x] == "*"):
-                solution *= int(stringList[x + 1])
-            elif (stringList[x] == "%"):
-                solution = solution % int(stringList[x + 1])
-            elif (stringList[x] == "^"):
-                solution = solution ^ int(stringList[x + 1])
-    return solution
 
 
 
