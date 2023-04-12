@@ -5,7 +5,7 @@ s = socket.socket()
 host = socket.gethostname()
 port = 6000
 
-s.connect((host, 6000))
+s.connect((host, port))
 
 message = s.recv(1024).decode()
 
