@@ -10,6 +10,7 @@ s.connect((host, port))
 
 message = s.recv(1024).decode()
 
+
 def generate():
     symbol="+-*%^/"
     for x in range(0, 1000):

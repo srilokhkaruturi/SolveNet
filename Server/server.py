@@ -8,6 +8,11 @@ def create_log_message(action, message):
     current_time = datetime.now().strftime("%H:%M")
     return "{} [{}] {} {}\n".format(current_date, action, current_time, message)
 
+class clientRequest:
+    connectionTime= ""
+    disconnectionTime=""
+    userId=""    
+
 def calculateLine(line):
     stringList = line.split("")
     solution= int(stringList[0])
