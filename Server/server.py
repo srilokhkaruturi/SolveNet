@@ -18,7 +18,7 @@ def clientThread(ip, port):
     print(";-;")
 
 def calculateLine(line):
-    stringList = line.split("")
+    stringList = line.split(" ")
     solution= int(stringList[0])
     for x in range(1 , len(stringList) , 2):
         if(x % 2 == 1):
@@ -56,8 +56,11 @@ while (True):
     # send welcome message
     message = "Thank you for connecting."
     c.send(message.encode())
-    print(c.recv(1024).decode())
-
+    x=c.recv(1024).decode()
+    print(x)
+    z=str(calculateLine(x))
+    print(z)
+    c.send(z.encode())
     if(c.recv(1024).decode() == "exit"):
 
         print(" Shutting down server.")
