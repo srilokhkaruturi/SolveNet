@@ -1,6 +1,7 @@
 from datetime import datetime
 import socket
 import sys
+import threading
 
 ## logging
 def create_log_message(action, message):
@@ -11,7 +12,10 @@ def create_log_message(action, message):
 class clientRequest:
     connectionTime= ""
     disconnectionTime=""
-    userId=""    
+    userId=""
+
+def clientThread(ip, port):
+    print(";-;")
 
 def calculateLine(line):
     stringList = line.split("")
@@ -42,8 +46,10 @@ logFile = open("log.txt", 'a')
 
 while (True):
     c, addr = s.accept()
-
+    Ip , port = addr
+    #x = threading.Thread(target= ,  args=(str(Ip),str(port),)
     # log new connection
+    #print(str(Ip) + " " + str(port))
     print('[server] Received connection from', addr)
     create_log_message("[server] Received connection from", addr)
 
