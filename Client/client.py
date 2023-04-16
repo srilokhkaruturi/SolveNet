@@ -39,16 +39,16 @@ class Client:
         symbol = "+-*%^/"
         for x in range(0, 1):
 
-            a = random.randint(0, 9)
+            a = random.randint(1, 9)
             a1 = symbol[random.randint(0, 5)]
-            b = random.randint(0, 9)
+            b = random.randint(1, 9)
 
             first = str(a) + " " + a1 + " " + str(b)
             if (random.randint(0, 1)):
                 b1 = symbol[random.randint(0, 5)]
-                a = random.randint(0, 9)
+                a = random.randint(1, 9)
                 a1 = symbol[random.randint(0, 5)]
-                b = random.randint(0, 9)
+                b = random.randint(1, 9)
                 first += " " + b1 + " " + str(a) + " " + a1 + " " + str(b)
                 return str(first)
             else:
@@ -68,7 +68,8 @@ def client():
     while (True):
         # sending
         sending_message = Client.generate()
-        client.send(sending_message) # CHANGE THIS IF YOU WANT TO TEST WITH THE SAME EXPRESSION
+        # CHANGE THIS IF YOU WANT TO TEST WITH THE SAME EXPRESSION
+        client.send(sending_message)
         print("Sending:", sending_message)
 
         # recieving

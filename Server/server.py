@@ -39,7 +39,7 @@ def calculateLine(line):
                 # ISSUE WITH FLOAT/INTS/EXPONENTS
                 solution = solution % int(stringList[x + 1])
             elif (stringList[x] == "^"):
-                solution = solution ^ int(stringList[x + 1])
+                solution = solution ** int(stringList[x + 1])
     return solution
 
 
