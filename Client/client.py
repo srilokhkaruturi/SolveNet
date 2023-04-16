@@ -9,7 +9,7 @@ class Client:
         self.destination_ip = destination_ip
         self.destination_port = destination_port
         self.socket = socket.socket()
-
+        self.name = Client.get_random_name()
 
     def connect(self):
         # CONNECT
@@ -20,7 +20,7 @@ class Client:
         print("[Client %s] %s" % (self.name, server_ack))
 
         # SEND NAME
-        self.s.send(self.name)
+        self.send(self.name)
 
         # RECEIVE NAME ACK
         name_server_ack = self.s.recv(1024).decode()
@@ -30,8 +30,10 @@ class Client:
 
     def send(self, msg: str):
         self.socket.send(msg.encode())
+
     def recieve(self):
         return self.socket.recv(1024).decode()
+
     @staticmethod
     def generate():
         symbol = "+-*%^/"
@@ -47,7 +49,7 @@ class Client:
                 a = random.randint(0, 9)
                 a1 = symbol[random.randint(0, 5)]
                 b = random.randint(0, 9)
-                first += " " +  b1 + " " + str(a)  + " "+ a1 + " " + str(b)
+                first += " " + b1 + " " + str(a) + " " + a1 + " " + str(b)
                 return str(first)
             else:
                 return str(first)
@@ -56,8 +58,7 @@ class Client:
     def get_random_name():
         response = requests.get("https://randomuser.me/api/")
         data = dict(response.json())
-        name = data["results"]
-        return data["results"]["name"]["first"]
+        return (data["results"][0])["name"]["first"]
 
 
 def client():
@@ -65,13 +66,18 @@ def client():
     client.connect()
 
     while (True):
-         # sending
-         sending_message = client.generate()
-         print(sending_message)
-         client.send(sending_message)
+        # sending
+        sending_message = client.generate()
+        print(sending_message)
+        client.send(sending_message)
 
-         # receiving
-         received_message = client.recieve()
-         print(received_message)
+        sending_message = Client.generate()
+        print(sending_message)
+        client.send(sending_message)
+
+        # recieving
+        recieved_message = client.recieve()
+        print(recieved_message)
+
 
 client()
