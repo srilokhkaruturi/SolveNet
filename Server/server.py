@@ -23,7 +23,7 @@ def clientThread(ip, port):
 
 
 def calculateLine(line):
-    stringList = line.split("")
+    stringList = line.split(" ")
     solution = int(stringList[0])
     for x in range(1, len(stringList), 2):
         if (x % 2 == 1):
@@ -36,6 +36,7 @@ def calculateLine(line):
             elif (stringList[x] == "*"):
                 solution *= int(stringList[x + 1])
             elif (stringList[x] == "%"):
+                # ISSUE WITH FLOAT/INTS/EXPONENTS
                 solution = solution % int(stringList[x + 1])
             elif (stringList[x] == "^"):
                 solution = solution ^ int(stringList[x + 1])
@@ -51,6 +52,7 @@ print("[Server] Server Socket is listening on PORT:", port)
 logFile = open("log.txt", 'a')
 
 while (True):
+    # TODO: Change C -> Client??
     c, addr = s.accept()
     Ip, port = addr
     # x = threading.Thread(target= ,  args=(str(Ip),str(port),)
@@ -62,25 +64,27 @@ while (True):
     # send welcome message
     message = "Thank you for connecting."
     c.send(message.encode())
-    print(c.recv(1024).decode())
 
-    if (c.recv(1024).decode() == "exit"):
+    # receive client name and send name ack
+    name = c.recv(1024).decode()
+    message = "Hello " + name + "!"
+    c.send(message.encode())
 
-        print(" Shutting down server.")
-        c.close()
-        break
-    else:
-        x = c.recv(1024).decode()
-        z = str(calculateLine(x))
-        c.send(z.encode())
-    c.send(message.encode("utf-8"))
-    create_log_message("[server][Sending -> %s]" % (str(addr)), message)
+    while (True):
+        expression = c.recv(1024).decode()
+        if (expression == "exit"):
+            print("[server] Shutting down server.")
+            c.close()
+            break
+        else:
+            result = str(calculateLine(expression))
+            c.send(result.encode())
 
-    # recv message
-    received_message = s.recv(1024).decode()
-    print("[server][Received from -> %s] %s" % (str(addr), received_message))
-    create_log_message("[server][Received from -> %s] %s" %
-                       (str(addr), received_message))
+            print("[server][Sending -> %s]" %
+                  result)
+
+            # create_log_message("[server][Received from -> %s] %s" %
+            #                    (str(addr), expression))
 
     print("[server] Shutting down server.")
     c.close()

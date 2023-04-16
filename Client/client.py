@@ -13,17 +13,17 @@ class Client:
 
     def connect(self):
         # CONNECT
-        self.s.connect((self.destination_ip, self.destination_port))
+        self.socket.connect((self.destination_ip, self.destination_port))
 
         # RECEIVE INITIAL SERVER ACK
-        server_ack = self.s.recv(1024).decode()
+        server_ack = self.socket.recv(1024).decode()
         print("[Client %s] %s" % (self.name, server_ack))
 
         # SEND NAME
         self.send(self.name)
 
         # RECEIVE NAME ACK
-        name_server_ack = self.s.recv(1024).decode()
+        name_server_ack = self.socket.recv(1024).decode()
         print("[Client %s] %s" % (self.name, name_server_ack))
 
         # FINISH
@@ -67,17 +67,13 @@ def client():
 
     while (True):
         # sending
-        sending_message = client.generate()
-        print(sending_message)
-        client.send(sending_message)
-
         sending_message = Client.generate()
-        print(sending_message)
-        client.send(sending_message)
+        client.send(sending_message) # CHANGE THIS IF YOU WANT TO TEST WITH THE SAME EXPRESSION
+        print("Sending:", sending_message)
 
         # recieving
         recieved_message = client.recieve()
-        print(recieved_message)
+        print("Received:", recieved_message)
 
 
 client()
