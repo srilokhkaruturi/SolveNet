@@ -1,7 +1,7 @@
 import socket
 import sys
 import random
-#import names
+import requests
 
 
 class Client:
@@ -10,19 +10,28 @@ class Client:
         self.destination_port = destination_port
         self.socket = socket.socket()
 
+
     def connect(self):
-        self.socket.connect((self.destination_ip, self.destination_port))
-        message = self.socket.recv(1024).decode()
-        print("[Client]", message)
+        # CONNECT
+        self.s.connect((self.destination_ip, self.destination_port))
+
+        # RECEIVE INITIAL SERVER ACK
+        server_ack = self.s.recv(1024).decode()
+        print("[Client %s] %s" % (self.name, server_ack))
+
+        # SEND NAME
+        self.s.send(self.name)
+
+        # RECEIVE NAME ACK
+        name_server_ack = self.s.recv(1024).decode()
+        print("[Client %s] %s" % (self.name, name_server_ack))
+
+        # FINISH
 
     def send(self, msg: str):
         self.socket.send(msg.encode())
     def recieve(self):
         return self.socket.recv(1024).decode()
-    @staticmethod
-    def get_random_name():
-        pass
-
     @staticmethod
     def generate():
         symbol = "+-*%^/"
@@ -43,14 +52,19 @@ class Client:
             else:
                 return str(first)
 
+    @staticmethod
+    def get_random_name():
+        response = requests.get("https://randomuser.me/api/")
+        data = dict(response.json())
+        name = data["results"]
+        return data["results"]["name"]["first"]
+
 
 def client():
     client = Client("127.0.0.1", 6000)
     client.connect()
 
     while (True):
-         expression = input("Input: ")
-
          # sending
          sending_message = client.generate()
          print(sending_message)
