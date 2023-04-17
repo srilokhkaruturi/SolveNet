@@ -1,8 +1,6 @@
 import socket
-import sys
 import random
 import requests
-
 
 class Client:
     def __init__(self, destination_ip, destination_port):
@@ -65,7 +63,8 @@ def client():
     client = Client("127.0.0.1", 6000)
     client.connect()
 
-    while (True):
+    
+    for i in range(0, 5):
         # sending
         sending_message = Client.generate()
         # CHANGE THIS IF YOU WANT TO TEST WITH THE SAME EXPRESSION
@@ -75,6 +74,9 @@ def client():
         # recieving
         recieved_message = client.recieve()
         print("Received:", recieved_message)
+    
+    # Send exit message
+    client.send('exit')
 
 
 client()
