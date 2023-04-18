@@ -1,5 +1,6 @@
-Client Name: Ariane, Connection Time: 2023-04-17 13:29, IP Address: 127.0.0.1, Port Number: 49320
-Client Name: Hilda, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49544
-Client Name: Frank-Peter, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49547
-Client Name: Jesse, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49558
-Client Name: Lurdes, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49561
+[CONNECT] Client Name: Yvonne, Connection Time: 2023-04-1817:16, IP Address: 127.0.0.1, Port Number: 50004
+[DISCONNECT] Client Name: Yvonne, Disconnection Time: 2023-04-1817:16, IP Address: 127.0.0.1, Port Number: 50004, Duration: 0:00:17.179655
+[CONNECT] Client Name: Ege, Connection Time: 2023-04-1817:16, IP Address: 127.0.0.1, Port Number: 50013
+[CONNECT] Client Name: Said, Connection Time: 2023-04-1817:16, IP Address: 127.0.0.1, Port Number: 50016
+[DISCONNECT] Client Name: Ege, Disconnection Time: 2023-04-1817:17, IP Address: 127.0.0.1, Port Number: 50013, Duration: 0:00:17.616316
+[DISCONNECT] Client Name: Said, Disconnection Time: 2023-04-1817:17, IP Address: 127.0.0.1, Port Number: 50016, Duration: 0:00:16.651807

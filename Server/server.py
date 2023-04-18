@@ -17,18 +17,23 @@ class Server:
         client_socket, address = self.socket.accept()
         print('[Server] Received connection from', address)
         # Get connection time
-        current_date = datetime.today().strftime('%Y-%m-%d')
-        current_time = datetime.now().strftime("%H:%M")
-        # Get the full time with date
-        connection_time = current_date + ' ' + current_time
+        connection_time = datetime.now()
+        
         # Extract client's IP address and port number
         ip, port = address
         # Return client details
         return client_socket, ip, port, connection_time
         
-    def close_connection(self, client_socket, client_name):
+    def close_connection(self, client_socket, client_name, connection_time):
+        # Get disconnection time
+        disconnection_time = datetime.now()
+        # Calculate the duration connected
+        duration = disconnection_time - connection_time
+        # Close the socket connection
         client_socket.close()
         print("[Server] Shutting down the connection for Client {}.".format(client_name))
+        
+        return disconnection_time, duration
 
     def send(self, client_socket, message):
         client_socket.send(message.encode())
@@ -42,8 +47,15 @@ class Server:
     def close_file(self):
         self.log_file.close()
 
-    def log_message(self, ip, port, name, time):
-        self.log_file.write('Client Name: {}, Connection Time: {}, IP Address: {}, Port Number: {}\n'.format(name, time, ip, port))
+    def log_message(self, ip, port, name, time, action, duration=""):
+        formatted_time = time.strftime("%Y-%m-%d%H:%M")
+        if action == "CONNECT":
+            self.log_file.write('[{}] Client Name: {}, Connection Time: {}, IP Address: {}, Port Number: {}\n'.format(action, name, formatted_time, ip, port))
+        else:
+            self.log_file.write('[{}] Client Name: {}, Disconnection Time: {}, IP Address: {}, Port Number: {}, Duration: {}\n'.format(action, name, formatted_time, ip, port, duration))
+        
+        self.log_file.flush()
+
     
     def calculate_expression(self, expression):
         stringList = expression.split(" ")
@@ -64,7 +76,7 @@ class Server:
                     result = result ** int(stringList[x + 1])
         return result
 
-def handle_client_connection(server, client_socket, ip, port, time):
+def handle_client_connection(server, client_socket, ip, port, connection_time):
     # Send initial server acknowledgement
     message = "Thank you for connecting."
     server.send(client_socket, message)
@@ -75,7 +87,7 @@ def handle_client_connection(server, client_socket, ip, port, time):
     server.send(client_socket, message)
 
     # Log the client details
-    server.log_message(ip, port, name, time)
+    server.log_message(ip, port, name, connection_time, action="CONNECT")
 
     while (True):
         expression = server.receive(client_socket)
@@ -83,7 +95,8 @@ def handle_client_connection(server, client_socket, ip, port, time):
         print("[Server] Received \" {} \" from Client {}".format(expression, name))
 
         if (expression == "exit"):
-            server.close_connection(client_socket, name)
+            disconnection_time, duration = server.close_connection(client_socket, name, connection_time)
+            server.log_message(ip, port, name, disconnection_time, action="DISCONNECT", duration=duration)
             break
         else:
             result = str(server.calculate_expression(expression))
