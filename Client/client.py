@@ -1,6 +1,7 @@
 import socket
 import random
 import requests
+import time
 
 class Client:
     def __init__(self, destination_ip, destination_port):
@@ -12,17 +13,18 @@ class Client:
     def connect(self):
         # CONNECT
         self.socket.connect((self.destination_ip, self.destination_port))
+        print("[Client {}] Sent a connection request to Server".format(self.name))
 
         # RECEIVE INITIAL SERVER ACK
         server_ack = self.socket.recv(1024).decode()
-        print("[Client %s] %s" % (self.name, server_ack))
+        print("[Client {}] Received \" {} \" from Server".format(self.name, server_ack))
 
         # SEND NAME
         self.send(self.name)
 
         # RECEIVE NAME ACK
         name_server_ack = self.socket.recv(1024).decode()
-        print("[Client %s] %s" % (self.name, name_server_ack))
+        print("[Client {}] Received \" {} \" from Server".format(self.name, name_server_ack))
 
         # FINISH
 
@@ -63,17 +65,22 @@ def client():
     client = Client("127.0.0.1", 6000)
     client.connect()
 
-    
-    for i in range(0, 5):
-        # sending
+    for i in range(5):
+
+        # Wait 2-5 seconds randomly before sending a new request
+        wait_time = random.uniform(2, 5)
+        time.sleep(wait_time)
+
+        # Send the auto-generated expression
         sending_message = Client.generate()
+
+        print("[Client {}] Sent \" {} \" to the Server".format(client.name, sending_message))
         # CHANGE THIS IF YOU WANT TO TEST WITH THE SAME EXPRESSION
         client.send(sending_message)
-        print("Sending:", sending_message)
 
-        # recieving
+        # Receive the result
         recieved_message = client.recieve()
-        print("Received:", recieved_message)
+        print("[Client {}] Received \" {} \" from the Server".format(client.name, recieved_message))
     
     # Send exit message
     client.send('exit')

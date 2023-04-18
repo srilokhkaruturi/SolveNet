@@ -1,1 +1,5 @@
 Client Name: Ariane, Connection Time: 2023-04-17 13:29, IP Address: 127.0.0.1, Port Number: 49320
+Client Name: Hilda, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49544
+Client Name: Frank-Peter, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49547
+Client Name: Jesse, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49558
+Client Name: Lurdes, Connection Time: 2023-04-18 00:10, IP Address: 127.0.0.1, Port Number: 49561
