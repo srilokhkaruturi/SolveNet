@@ -4,7 +4,7 @@ import threading
 import socket
 
 class Server:
-    def __init__(self, port, file_name):
+    def __init__(self, port):
         self.socket = socket.socket()
         self.log_file = None
         # Bind this socket to the specified port on all network interfaces of the machine
@@ -48,11 +48,21 @@ class Server:
         self.log_file.close()
 
     def log_message(self, ip, port, name, time, action, duration=""):
-        formatted_time = time.strftime("%Y-%m-%d%H:%M")
+        # format time
+        formatted_time = time.strftime("%Y-%m-%d %H:%M")
         if action == "CONNECT":
             self.log_file.write('[{}] Client Name: {}, Connection Time: {}, IP Address: {}, Port Number: {}\n'.format(action, name, formatted_time, ip, port))
         else:
-            self.log_file.write('[{}] Client Name: {}, Disconnection Time: {}, IP Address: {}, Port Number: {}, Duration: {}\n'.format(action, name, formatted_time, ip, port, duration))
+            # Get total number of seconds
+            total_seconds = duration.total_seconds()
+
+            # Compute hours, minutes and seconds
+            hours = int(total_seconds // 3600)
+            minutes = int((total_seconds % 3600) // 60)
+            seconds = int(total_seconds % 60)
+
+            self.log_file.write('[{}] Client Name: {}, Disconnection Time: {}, IP Address: {}, Port Number: {}, Duration: [Hours: {}, Minutes: {}, Seconds: {}]\n'
+                            .format(action, name, formatted_time, ip, port, hours, minutes, seconds))
         
         self.log_file.flush()
 
@@ -111,7 +121,7 @@ def server():
     file_name = 'log'
 
     # Create a new server instance
-    server = Server(port=port, file_name=file_name)
+    server = Server(port=port)
     print('[Server] Server socket is listening on PORT:', port)
 
     # Open the log file for appending
