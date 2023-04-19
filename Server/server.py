@@ -3,6 +3,7 @@ from datetime import datetime
 import threading
 import socket
 
+#server Class , instantiated on the start of the script
 class Server:
     def __init__(self, port):
         self.socket = socket.socket()
@@ -12,6 +13,7 @@ class Server:
         # Specify the maximum number of connections that this socket can service
         self.socket.listen(5)
 
+    #Server object accepting the connection method
     def accept_connection(self):
         # Accept connection request
         client_socket, address = self.socket.accept()
@@ -23,7 +25,8 @@ class Server:
         ip, port = address
         # Return client details
         return client_socket, ip, port, connection_time
-        
+
+    #Server Object closes connection with client
     def close_connection(self, client_socket, client_name, connection_time):
         # Get disconnection time
         disconnection_time = datetime.now()
@@ -35,12 +38,15 @@ class Server:
         
         return disconnection_time, duration
 
+    #method for Server object to send string message
     def send(self, client_socket, message):
         client_socket.send(message.encode())
 
+    # method for Server object to recieve string message
     def receive(self, client):
         return client.recv(1024).decode()
-    
+
+    #method to open the file, done in appending mode since there are multiple clients and can be accessed at random times.
     def open_file(self, file_name):
         self.log_file = open(file_name + '.txt', 'a')
 
