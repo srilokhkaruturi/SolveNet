@@ -3,6 +3,7 @@ import random
 import requests
 import time
 
+#client class
 class Client:
     def __init__(self, destination_ip, destination_port):
         self.destination_ip = destination_ip
@@ -28,22 +29,29 @@ class Client:
 
         # FINISH
 
+    #send message to client
     def send(self, msg: str):
         self.socket.send(msg.encode())
 
+    #recieve message from client
     def recieve(self):
         return self.socket.recv(1024).decode()
 
+    #generating a random mathematical expression to be sent to server to be solved
     @staticmethod
     def generate():
+        #symbol string is used to be able to choose an operator
         symbol = "+-*%^/"
-        for x in range(0, 1):
 
+        for x in range(0, 1):
+            #a and b are a random integer for the expression, a1 is the operand
             a = random.randint(1, 9)
             a1 = symbol[random.randint(0, 5)]
             b = random.randint(1, 9)
 
             first = str(a) + " " + a1 + " " + str(b)
+
+            #50 /50 chance for an extended expression
             if (random.randint(0, 1)):
                 b1 = symbol[random.randint(0, 5)]
                 a = random.randint(1, 9)
@@ -54,6 +62,7 @@ class Client:
             else:
                 return str(first)
 
+    #gets random name from the api to represent the client name
     @staticmethod
     def get_random_name():
         response = requests.get("https://randomuser.me/api/")
@@ -62,6 +71,7 @@ class Client:
 
 
 def client():
+    #uses local host by default
     client = Client("127.0.0.1", 6000)
     client.connect()
 

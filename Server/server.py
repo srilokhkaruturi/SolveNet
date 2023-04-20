@@ -50,9 +50,11 @@ class Server:
     def open_file(self, file_name):
         self.log_file = open(file_name + '.txt', 'a')
 
+    #close the file for logging
     def close_file(self):
         self.log_file.close()
 
+    #log a connect or disconnect message in the log file
     def log_message(self, ip, port, name, time, action, duration=""):
         # format time
         formatted_time = time.strftime("%Y-%m-%d %H:%M")
@@ -72,7 +74,7 @@ class Server:
         
         self.log_file.flush()
 
-    
+    #calculates the expression , taking the first integer, and then iterating through the operand and second integer pair
     def calculate_expression(self, expression):
         stringList = expression.split(" ")
         result = int(stringList[0])
