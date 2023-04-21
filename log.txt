@@ -2,3 +2,11 @@
 [CONNECT] Client Name: Bastien, Connection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65428
 [DISCONNECT] Client Name: Lilian, Disconnection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65427, Duration: [Hours: 0, Minutes: 0, Seconds: 17]
 [DISCONNECT] Client Name: Bastien, Disconnection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65428, Duration: [Hours: 0, Minutes: 0, Seconds: 19]
+[CONNECT] Client Name: Noach, Connection Time: 2023-04-20 21:52, IP Address: 127.0.0.1, Port Number: 49888
+[CONNECT] Client Name: Deniz, Connection Time: 2023-04-20 21:52, IP Address: 127.0.0.1, Port Number: 49889
+[DISCONNECT] Client Name: Deniz, Disconnection Time: 2023-04-20 21:53, IP Address: 127.0.0.1, Port Number: 49889, Duration: [Hours: 0, Minutes: 0, Seconds: 16]
+[DISCONNECT] Client Name: Noach, Disconnection Time: 2023-04-20 21:53, IP Address: 127.0.0.1, Port Number: 49888, Duration: [Hours: 0, Minutes: 0, Seconds: 21]
+[CONNECT] Client Name: Mikael, Connection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49904
+[CONNECT] Client Name: Saskia, Connection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49905
+[DISCONNECT] Client Name: Saskia, Disconnection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49905, Duration: [Hours: 0, Minutes: 0, Seconds: 17]
+[DISCONNECT] Client Name: Mikael, Disconnection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49904, Duration: [Hours: 0, Minutes: 0, Seconds: 20]

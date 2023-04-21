@@ -1,8 +1,7 @@
 import subprocess
 import time
 
-print("Enter desired number of clients")
-y = input()
+y = input("Enter desired number of clients: ")
 
 subprocess.Popen(["python3", "./Server/server.py"])
 

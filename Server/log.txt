@@ -1,4 +1,0 @@
-[CONNECT] Client Name: Karen, Connection Time: 2023-04-18 18:17, IP Address: 127.0.0.1, Port Number: 50228
-[CONNECT] Client Name: Tanja, Connection Time: 2023-04-18 18:18, IP Address: 127.0.0.1, Port Number: 50239
-[CONNECT] Client Name: Florent, Connection Time: 2023-04-18 18:21, IP Address: 127.0.0.1, Port Number: 50273
-[DISCONNECT] Client Name: Florent, Disconnection Time: 2023-04-18 18:21, IP Address: 127.0.0.1, Port Number: 50273, Duration: [Hours: 0, Minutes: 0, Seconds: 17]
