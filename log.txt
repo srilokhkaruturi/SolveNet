@@ -1,12 +1,36 @@
-[CONNECT] Client Name: Lilian, Connection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65427
-[CONNECT] Client Name: Bastien, Connection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65428
-[DISCONNECT] Client Name: Lilian, Disconnection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65427, Duration: [Hours: 0, Minutes: 0, Seconds: 17]
-[DISCONNECT] Client Name: Bastien, Disconnection Time: 2023-04-20 17:57, IP Address: 127.0.0.1, Port Number: 65428, Duration: [Hours: 0, Minutes: 0, Seconds: 19]
-[CONNECT] Client Name: Noach, Connection Time: 2023-04-20 21:52, IP Address: 127.0.0.1, Port Number: 49888
-[CONNECT] Client Name: Deniz, Connection Time: 2023-04-20 21:52, IP Address: 127.0.0.1, Port Number: 49889
-[DISCONNECT] Client Name: Deniz, Disconnection Time: 2023-04-20 21:53, IP Address: 127.0.0.1, Port Number: 49889, Duration: [Hours: 0, Minutes: 0, Seconds: 16]
-[DISCONNECT] Client Name: Noach, Disconnection Time: 2023-04-20 21:53, IP Address: 127.0.0.1, Port Number: 49888, Duration: [Hours: 0, Minutes: 0, Seconds: 21]
-[CONNECT] Client Name: Mikael, Connection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49904
-[CONNECT] Client Name: Saskia, Connection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49905
-[DISCONNECT] Client Name: Saskia, Disconnection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49905, Duration: [Hours: 0, Minutes: 0, Seconds: 17]
-[DISCONNECT] Client Name: Mikael, Disconnection Time: 2023-04-20 21:54, IP Address: 127.0.0.1, Port Number: 49904, Duration: [Hours: 0, Minutes: 0, Seconds: 20]
+[CONNECT]  Client Name: Simon, Connection Time: 2023-04-22 11:01, IP Address: 127.0.0.1, Port Number: 49413
+[CONNECT]  Client Name: Alicia, Connection Time: 2023-04-22 11:01, IP Address: 127.0.0.1, Port Number: 49416
+[CONNECT]  Client Name: Massimiliano, Connection Time: 2023-04-22 11:01, IP Address: 127.0.0.1, Port Number: 49419
+[MESSAGE]  Server received " 5 / 6 " from Client Simon
+           Server sent " 0.8333333333333334 " as result to Client Simon
+[MESSAGE]  Server received " 3 * 8 " from Client Alicia
+           Server sent " 24 " as result to Client Alicia
+[MESSAGE]  Server received " 8 * 1 / 3 ^ 6 " from Client Massimiliano
+           Server sent " 359.59396433470494 " as result to Client Massimiliano
+[MESSAGE]  Server received " 2 % 1 % 9 * 6 " from Client Simon
+           Server sent " 0 " as result to Client Simon
+[MESSAGE]  Server received " 8 - 9 " from Client Alicia
+           Server sent " -1 " as result to Client Alicia
+[MESSAGE]  Server received " 2 % 4 " from Client Massimiliano
+           Server sent " 2 " as result to Client Massimiliano
+[MESSAGE]  Server received " 4 / 5 " from Client Simon
+           Server sent " 0.8 " as result to Client Simon
+[MESSAGE]  Server received " 5 * 6 ^ 7 - 9 " from Client Alicia
+           Server sent " 21869999991 " as result to Client Alicia
+[MESSAGE]  Server received " 3 * 5 - 8 + 8 " from Client Massimiliano
+           Server sent " 15 " as result to Client Massimiliano
+[MESSAGE]  Server received " 8 * 5 % 2 - 6 " from Client Simon
+           Server sent " -6 " as result to Client Simon
+[MESSAGE]  Server received " 6 + 8 " from Client Massimiliano
+           Server sent " 14 " as result to Client Massimiliano
+[MESSAGE]  Server received " 2 ^ 4 " from Client Alicia
+           Server sent " 16 " as result to Client Alicia
+[MESSAGE]  Server received " 1 % 7 " from Client Simon
+           Server sent " 1 " as result to Client Simon
+[DISCONNECT] Client Name: Simon, Disconnection Time: 2023-04-22 11:02, IP Address: 127.0.0.1, Port Number: 49413, Duration: [Hours: 0, Minutes: 0, Seconds: 20]
+[MESSAGE]  Server received " 7 - 8 + 4 + 3 " from Client Massimiliano
+           Server sent " 6 " as result to Client Massimiliano
+[DISCONNECT] Client Name: Massimiliano, Disconnection Time: 2023-04-22 11:02, IP Address: 127.0.0.1, Port Number: 49419, Duration: [Hours: 0, Minutes: 0, Seconds: 17]
+[MESSAGE]  Server received " 9 % 3 - 4 / 7 " from Client Alicia
+           Server sent " -0.5714285714285714 " as result to Client Alicia
+[DISCONNECT] Client Name: Alicia, Disconnection Time: 2023-04-22 11:02, IP Address: 127.0.0.1, Port Number: 49416, Duration: [Hours: 0, Minutes: 0, Seconds: 21]

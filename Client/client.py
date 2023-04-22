@@ -3,7 +3,7 @@ import random
 import requests
 import time
 
-#client class
+# Client class
 class Client:
     def __init__(self, destination_ip, destination_port):
         self.destination_ip = destination_ip
@@ -29,29 +29,29 @@ class Client:
 
         # FINISH
 
-    #send message to client
+    # Sends message to server
     def send(self, msg: str):
         self.socket.send(msg.encode())
 
-    #recieve message from client
+    # Recieves message from server
     def recieve(self):
         return self.socket.recv(1024).decode()
 
-    #generating a random mathematical expression to be sent to server to be solved
+    # Generates a random mathematical expression to be sent to server to be solved
     @staticmethod
     def generate():
-        #symbol string is used to be able to choose an operator
+        # Symbol string is used to be able to choose an operator
         symbol = "+-*%^/"
 
         for x in range(0, 1):
-            #a and b are a random integer for the expression, a1 is the operand
+            # a and b are a random integer for the expression, a1 is the operand
             a = random.randint(1, 9)
             a1 = symbol[random.randint(0, 5)]
             b = random.randint(1, 9)
 
             first = str(a) + " " + a1 + " " + str(b)
 
-            #50 /50 chance for an extended expression
+            # 50/50 chance for an extended expression
             if (random.randint(0, 1)):
                 b1 = symbol[random.randint(0, 5)]
                 a = random.randint(1, 9)
@@ -62,7 +62,7 @@ class Client:
             else:
                 return str(first)
 
-    #gets random name from the api to represent the client name
+    # Gets random name from the api to represent the client name
     @staticmethod
     def get_random_name():
         response = requests.get("https://randomuser.me/api/")
@@ -70,8 +70,10 @@ class Client:
         return (data["results"][0])["name"]["first"]
 
 
+# Main method
+# Creates a Client class object and orchestrates the functionality of sending/receving math expressions to/from Server
 def client():
-    #uses local host by default
+    # Uses local host by default
     client = Client("127.0.0.1", 6000)
     client.connect()
 
@@ -85,7 +87,7 @@ def client():
         sending_message = Client.generate()
 
         print("[Client {}] Sent \" {} \" to the Server".format(client.name, sending_message))
-        # CHANGE THIS IF YOU WANT TO TEST WITH THE SAME EXPRESSION
+        # Change this if you want to test with the same expression
         client.send(sending_message)
 
         # Receive the result

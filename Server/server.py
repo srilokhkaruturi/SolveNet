@@ -3,7 +3,7 @@ from datetime import datetime
 import threading
 import socket
 
-#server Class , instantiated on the start of the script
+# Server Class, instantiated on the start of the script
 class Server:
     def __init__(self, port):
         self.socket = socket.socket()
@@ -26,7 +26,7 @@ class Server:
         # Return client details
         return client_socket, ip, port, connection_time
 
-    #Server Object closes connection with client
+    # Server object closes connection with client
     def close_connection(self, client_socket, client_name, connection_time):
         # Get disconnection time
         disconnection_time = datetime.now()
@@ -38,28 +38,34 @@ class Server:
         
         return disconnection_time, duration
 
-    #method for Server object to send string message
+    # Sends a string message to Client based on the specified client_socket info
     def send(self, client_socket, message):
         client_socket.send(message.encode())
 
-    # method for Server object to recieve string message
+    # Recieves a string message from some Client
     def receive(self, client):
         return client.recv(1024).decode()
 
-    #method to open the file, done in appending mode since there are multiple clients and can be accessed at random times.
+    # Opens the file, done in appending mode since there are multiple clients and can be accessed at random times.
     def open_file(self, file_name):
         self.log_file = open(file_name + '.txt', 'a')
 
-    #close the file for logging
+    # Closes the file for logging
     def close_file(self):
         self.log_file.close()
+    
+    def log_interaction(self, name, messages):
+            self.log_file.write("[MESSAGE]  Server received \" {1} \" from Client {0}\n"
+                               "           Server sent \" {2} \" as result to Client {0}\n"
+                               .format(name, messages[0], messages[1]))
+            self.log_file.flush()
 
-    #log a connect or disconnect message in the log file
-    def log_message(self, ip, port, name, time, action, duration=""):
+    # Logs a connect or disconnect message in the log file
+    def log_connection_message(self, ip, port, name, time, action, duration=""):
         # format time
         formatted_time = time.strftime("%Y-%m-%d %H:%M")
         if action == "CONNECT":
-            self.log_file.write('[{}] Client Name: {}, Connection Time: {}, IP Address: {}, Port Number: {}\n'.format(action, name, formatted_time, ip, port))
+            self.log_file.write('[{}]  Client Name: {}, Connection Time: {}, IP Address: {}, Port Number: {}\n'.format(action, name, formatted_time, ip, port))
         else:
             # Get total number of seconds
             total_seconds = duration.total_seconds()
@@ -74,7 +80,7 @@ class Server:
         
         self.log_file.flush()
 
-    #calculates the expression , taking the first integer, and then iterating through the operand and second integer pair
+    # Calculates the expression. It takes the first integer and then iterates through the operand and second integer pair
     def calculate_expression(self, expression):
         stringList = expression.split(" ")
         result = int(stringList[0])
@@ -94,6 +100,7 @@ class Server:
                     result = result ** int(stringList[x + 1])
         return result
 
+# Gets called upon each new client connection. It handles the interaction between the Server and a client.
 def handle_client_connection(server, client_socket, ip, port, connection_time):
     # Send initial server acknowledgement
     message = "Thank you for connecting."
@@ -105,7 +112,7 @@ def handle_client_connection(server, client_socket, ip, port, connection_time):
     server.send(client_socket, message)
 
     # Log the client details
-    server.log_message(ip, port, name, connection_time, action="CONNECT")
+    server.log_connection_message(ip, port, name, connection_time, action="CONNECT")
 
     while (True):
         expression = server.receive(client_socket)
@@ -114,7 +121,7 @@ def handle_client_connection(server, client_socket, ip, port, connection_time):
 
         if (expression == "exit"):
             disconnection_time, duration = server.close_connection(client_socket, name, connection_time)
-            server.log_message(ip, port, name, disconnection_time, action="DISCONNECT", duration=duration)
+            server.log_connection_message(ip, port, name, disconnection_time, action="DISCONNECT", duration=duration)
             break
         else:
             result = str(server.calculate_expression(expression))
@@ -122,7 +129,13 @@ def handle_client_connection(server, client_socket, ip, port, connection_time):
 
         # Print the answer of the expression received from the client
         print("[Server] Sent \" {} \" as a result to Client {}".format(result, name))
+
+        server.log_interaction(name, messages=[expression,result])
+
     
+# Main method
+# Initializes the Server object and listens on new client connection requests. 
+# Upon a new request, it creates a new thread with the client's details and pass it to handle_client_connection function for further interaction.
 def server():
     # Variables
     port = 6000
